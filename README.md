@@ -32,14 +32,16 @@
 |group|references|null: false, foreign_key: true|
 
 ### Association
-- has_many :users
-- has_many :groups
+- belongs_to :user
+- belongs_to :group
 
 ## messagesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |body|text|
 |image|string|
+|user|references|null: false, foreign_key: true|
+|group|references|null: false, foreign: true|
 
 ### Association
 - belongs_to :user
