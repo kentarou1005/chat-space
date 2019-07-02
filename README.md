@@ -28,7 +28,6 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|id|integer|null: false|
 |user|references|null: false, foreign_key: true|
 |group|references|null: false, foreign_key: true|
 
