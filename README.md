@@ -1,50 +1,47 @@
 # DB設計
 
-## userテーブル
+## usersテーブル
 
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false|
-|name|integer|null: false|
+|name|string|null: false, index: true|
 |email|integer|null: false|
 |password|integer|null: false|
 
 ### Association
-- belongs_to :user_group
-- belongs_to :message
+- has_many :user_groups
+- has_many :groups, through: :user_groups
+- has_many :messages
 
-### groupテーブル
-
-|Column|Type|Options|
-|------|----|-------|
-|group_id|integer|null: false|
-|group_name|integer|null: false|
-
-### Association
-- belongs :user_group
-- belongs :message
-
-## user_groupテーブル
+### groupsテーブル
 
 |Column|Type|Options|
 |------|----|-------|
-|user_group_id|integer|null: false|
-|user_id|integer|null: false, foreign_key: true|
-|group_id|integer|null: false, foreign_key: true|
+|name|string|null: false|
 
 ### Association
-- has_many :user
-- has_many :group
+- has_many :user_groups
+- has_many :users, through: :user_groups
+- has_many :messages
 
-## messageテーブル
+## user_groupsテーブル
+
 |Column|Type|Options|
 |------|----|-------|
-|message_id|integer|null: false|
-|message|text|null: false|
-image|string|
-|user_id|integer|null: false, foreign_key: true|
-|group_id|integer|null: false, foreign:true|
+|id|integer|null: false|
+|user|references|null: false, foreign_key: true|
+|group|references|null: false, foreign_key: true|
 
 ### Association
-- has_many :user
-- has_many :group
+- has_many :users
+- has_many :groups
+
+## messagesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|body|text|
+|image|string|
+
+### Association
+- belongs_to :user
+- belongs_to :group
